@@ -204,5 +204,9 @@ public interface BedrockBossEvent extends BedrockUIEvent<BossEventPacket> {
         public BossEventPacket.Action getBedrockAction() {
             return this.bedrockAction;
         }
+
+        public static BedrockBossEventAction fromCloudburstAction(BossEventPacket.Action action) {
+            return BedrockBossEventAction.valueOf(action.name());
+        }
     }
 }

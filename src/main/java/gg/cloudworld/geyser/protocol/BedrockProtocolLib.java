@@ -1,12 +1,16 @@
 package gg.cloudworld.geyser.protocol;
 
+import gg.cloudworld.geyser.protocol.api.events.BedrockEvent;
 import gg.cloudworld.geyser.protocol.api.events.listener.manager.BedrockEventManager;
+import gg.cloudworld.geyser.protocol.api.events.types.ui.BedrockBossEvent;
 import gg.cloudworld.geyser.protocol.api.test.TestListener;
 import gg.cloudworld.geyser.protocol.core.event.types.entity.AddEntityEventImp;
 import gg.cloudworld.geyser.protocol.core.event.types.ui.BedrockSetScoreEventImp;
 import gg.cloudworld.geyser.protocol.core.packet.BedrockPacketSnifferManager;
 import gg.cloudworld.geyser.protocol.core.packet.PacketEventRegistry;
 import org.cloudburstmc.protocol.bedrock.packet.AddEntityPacket;
+import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
+import org.cloudburstmc.protocol.bedrock.packet.BossEventPacket;
 import org.cloudburstmc.protocol.bedrock.packet.SetScorePacket;
 import org.geysermc.event.subscribe.Subscribe;
 import org.geysermc.geyser.api.event.bedrock.SessionDisconnectEvent;
@@ -18,8 +22,9 @@ import org.geysermc.geyser.session.GeyserSession;
 public class BedrockProtocolLib implements Extension
 {
     static {
-        PacketEventRegistry.getInstance().register(AddEntityPacket.class, AddEntityEventImp.class);
-        PacketEventRegistry.getInstance().register(SetScorePacket.class, BedrockSetScoreEventImp.class);
+        registerEvent(AddEntityPacket.class, AddEntityEventImp.class);
+        registerEvent(SetScorePacket.class, BedrockSetScoreEventImp.class);
+        registerEvent(BossEventPacket.class, BedrockBossEvent.class);
     }
 
     @Subscribe
@@ -34,5 +39,9 @@ public class BedrockProtocolLib implements Extension
     @Subscribe
     public void onBedrockJoin(SessionInitializeEvent e){
         BedrockPacketSnifferManager.getInstance().processJoin((GeyserSession) e.connection());
+    }
+
+    private static<P extends BedrockPacket, E extends BedrockEvent<P>> void registerEvent(Class<P> packetClass, Class<E> eventClass){
+        PacketEventRegistry.getInstance().register(packetClass,eventClass);
     }
 }
