@@ -31,7 +31,7 @@ public class EventManager {
                 Class<?> paramType = method.getParameterTypes()[0];
                 if (BedrockEvent.class.isAssignableFrom(paramType)) {
                     Class<? extends BedrockEvent<? extends BedrockPacket>> eventType = (Class<? extends BedrockEvent<? extends BedrockPacket>>) paramType;
-                    
+
                     listenerMap.computeIfAbsent(eventType, k -> new ArrayList<>());
                     listenerMap.get(eventType).add(new RegisteredListener(listener, method));
                 }
@@ -40,15 +40,22 @@ public class EventManager {
     }
 
     public void fireEvent(BedrockEvent<? extends BedrockPacket> event) {
-        List<RegisteredListener> listeners = listenerMap.get(event.getClass());
-        if (listeners != null) {
-            for (RegisteredListener registeredListener : listeners) {
-                try {
-                    registeredListener.method().invoke(registeredListener.listener(), event);
-                } catch (Exception e) {
-                    System.err.println("Error on listener" + e.getMessage());
-                    e.printStackTrace();
+        Map<Method, RegisteredListener> listenersToInvoke = new HashMap<>();
+
+        for (Map.Entry<Class<? extends BedrockEvent<? extends BedrockPacket>>, List<RegisteredListener>> entry : listenerMap.entrySet()) {
+            if (entry.getKey().isAssignableFrom(event.getClass())) {
+                for (RegisteredListener listener : entry.getValue()) {
+                    listenersToInvoke.putIfAbsent(listener.method(), listener);
                 }
+            }
+        }
+
+        for (RegisteredListener registeredListener : listenersToInvoke.values()) {
+            try {
+                registeredListener.method().invoke(registeredListener.listener(), event);
+            } catch (Exception e) {
+                System.err.println("Error on listener" + e.getMessage());
+                e.printStackTrace();
             }
         }
     }
