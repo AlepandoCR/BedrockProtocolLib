@@ -1,6 +1,5 @@
 package gg.cloudworld.geyser.protocol.core.event.types.entity;
 
-import gg.cloudworld.geyser.protocol.api.events.BedrockEvent;
 import gg.cloudworld.geyser.protocol.api.events.types.entity.AddEntityEvent;
 import gg.cloudworld.geyser.protocol.core.entity.util.EntityUtils;
 import org.cloudburstmc.math.vector.Vector2f;

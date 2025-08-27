@@ -3,10 +3,12 @@ package gg.cloudworld.geyser.protocol.core.packet;
 import io.netty.channel.Channel;
 import org.cloudburstmc.protocol.bedrock.netty.codec.packet.BedrockPacketCodec;
 import org.geysermc.geyser.session.GeyserSession;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@ApiStatus.Internal
 public class BedrockPacketSnifferManager {
 
     private final List<BedrockPacketSniffer> packetSniffers = new ArrayList<>();
