@@ -1,0 +1,6 @@
+id: protocol
+name: BedrockProtocolLib
+main: gg.cloudworld.geyser.protocol.BedrockProtocolLib
+api: 2.8.3
+version: 1.0.0
+authors: [Alepando]
