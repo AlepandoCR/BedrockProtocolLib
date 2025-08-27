@@ -1,6 +1,5 @@
 package gg.cloudworld.geyser.protocol.api.world;
 
-import org.cloudburstmc.math.vector.Vector3d;
 import org.cloudburstmc.math.vector.Vector3f;
 
 /**
