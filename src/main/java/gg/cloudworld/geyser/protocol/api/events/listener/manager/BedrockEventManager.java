@@ -11,7 +11,6 @@ import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
  */
 public class BedrockEventManager {
 
-    // Singleton instance of the EventManager.
     private static final EventManager eventManager = EventManager.getInstance();
 
     private BedrockEventManager(){}

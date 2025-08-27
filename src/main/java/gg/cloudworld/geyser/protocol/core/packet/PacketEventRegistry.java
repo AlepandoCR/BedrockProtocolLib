@@ -27,6 +27,7 @@ public class PacketEventRegistry {
         this.eventMap.put(packetClass, new RegisteredPacketEvent<>(packetClass, eventClass));
     }
 
+    @SuppressWarnings("unchecked")
     public <P extends BedrockPacket> void handle(GeyserSession session, P packet) {
         RegisteredPacketEvent<?, ?> registered = eventMap.get(packet.getClass());
         if (registered == null) {
