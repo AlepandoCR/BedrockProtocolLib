@@ -7,7 +7,7 @@ import org.cloudburstmc.protocol.bedrock.packet.BossEventPacket;
  * Represents a Bedrock Boss Event, which is used to manage and display boss bars in the Bedrock protocol.
  * This interface extends the {@link BedrockPacket} and provides methods to manipulate boss event properties.
  */
-public interface BedrockBossEvent extends BedrockPacket {
+public interface BedrockBossEvent extends BedrockUIEvent<BossEventPacket> {
 
     /**
      * Gets the unique entity ID of the boss.
@@ -26,16 +26,16 @@ public interface BedrockBossEvent extends BedrockPacket {
     /**
      * Gets the current action of the boss event.
      *
-     * @return the current {@link BossEventAction}.
+     * @return the current {@link BedrockBossEventAction}.
      */
-    public BossEventAction getAction();
+    public BedrockBossEventAction getAction();
 
     /**
      * Sets the action for the boss event.
      *
-     * @param action the {@link BossEventAction} to set.
+     * @param action the {@link BedrockBossEventAction} to set.
      */
-    public void setAction(BossEventAction action);
+    public void setAction(BedrockBossEventAction action);
 
     /**
      * Gets the unique entity ID of the player associated with the boss event.
@@ -138,7 +138,7 @@ public interface BedrockBossEvent extends BedrockPacket {
     /**
      * Represents the possible actions for a boss event.
      */
-    public enum BossEventAction {
+    public enum BedrockBossEventAction {
 
         /**
          * Action to create a new boss event.
@@ -192,7 +192,7 @@ public interface BedrockBossEvent extends BedrockPacket {
          *
          * @param bedrockAction the Bedrock action associated with this BossEventAction.
          */
-        BossEventAction(BossEventPacket.Action bedrockAction) {
+        BedrockBossEventAction(BossEventPacket.Action bedrockAction) {
             this.bedrockAction = bedrockAction;
         }
 

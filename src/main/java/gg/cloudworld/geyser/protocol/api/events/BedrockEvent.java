@@ -3,6 +3,7 @@ package gg.cloudworld.geyser.protocol.api.events;
 import gg.cloudworld.geyser.protocol.api.entity.player.BedrockPlayer;
 import gg.cloudworld.geyser.protocol.api.events.listener.manager.BedrockEventManager;
 import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
+import org.geysermc.geyser.GeyserImpl;
 
 /**
  * Represents a Bedrock event in the protocol.
@@ -25,6 +26,7 @@ public interface BedrockEvent<T extends BedrockPacket> {
      */
     public default void call() {
         BedrockEventManager.fireEvent(this);
+        GeyserImpl.getInstance().getLogger().debug("Bedrock event has been called, event: " + this.getClass().getSimpleName());
     }
 
     /**

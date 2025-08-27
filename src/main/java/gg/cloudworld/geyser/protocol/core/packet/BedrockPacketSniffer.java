@@ -19,6 +19,8 @@ public class BedrockPacketSniffer extends PacketSniffer {
         if (msg instanceof BedrockPacketWrapper wrapper) {
             BedrockPacket packet = wrapper.getPacket();
             if(packet == null) return;
+
+            PacketEventRegistry.getInstance().handle(session, packet);
         }
 
         super.write(ctx, msg, promise);

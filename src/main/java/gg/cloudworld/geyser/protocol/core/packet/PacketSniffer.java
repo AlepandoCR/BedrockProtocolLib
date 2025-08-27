@@ -12,4 +12,8 @@ public abstract class PacketSniffer extends ChannelOutboundHandlerAdapter {
     public PacketSniffer(GeyserSession session) {
         this.session = session;
     }
+
+    public GeyserSession getSession() {
+        return session;
+    }
 }
