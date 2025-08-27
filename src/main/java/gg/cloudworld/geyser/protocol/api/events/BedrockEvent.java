@@ -18,13 +18,13 @@ public interface BedrockEvent<T extends BedrockPacket> {
      *
      * @return the {@link BedrockPlayer} associated with the event.
      */
-    public BedrockPlayer getBedrockPlayer();
+    BedrockPlayer getBedrockPlayer();
 
     /**
      * Calls the event, triggering all registered listeners for this event.
      * This method uses the {@link BedrockEventManager} to fire the event.
      */
-    public default void call() {
+    default void call() {
         BedrockEventManager.fireEvent(this);
         GeyserImpl.getInstance().getLogger().debug("Bedrock event has been called, event: " + this.getClass().getSimpleName());
     }
@@ -34,5 +34,5 @@ public interface BedrockEvent<T extends BedrockPacket> {
      *
      * @return the packet of type {@link T}.
      */
-    public T getPacket();
+    T getPacket();
 }

@@ -16,38 +16,38 @@ public interface BedrockSetScoreEvent extends BedrockUIEvent<SetScorePacket> {
      *
      * @return the {@link BedrockScoreAction} representing the current action.
      */
-    public BedrockScoreAction getAction();
+    BedrockScoreAction getAction();
 
     /**
      * Sets the score action for this event.
      *
      * @param action the {@link BedrockScoreAction} to set.
      */
-    public void setAction(BedrockScoreAction action);
+    void setAction(BedrockScoreAction action);
 
     /**
      * Retrieves the list of score information associated with this event.
      *
      * @return a list of {@link ScoreInfo} objects.
      */
-    public List<ScoreInfo> getInfos();
+    List<ScoreInfo> getInfos();
 
     /**
      * Sets the list of score information for this event.
      *
      * @param inputs a list of {@link ScoreInfo} objects to set.
      */
-    public void setInfos(List<ScoreInfo> inputs);
+    void setInfos(List<ScoreInfo> inputs);
 
     /**
      * Clears all score information associated with this event.
      */
-    public void clearInfos();
+    void clearInfos();
 
     /**
      * Enum representing the possible score actions in the Bedrock protocol.
      */
-    public enum BedrockScoreAction {
+    enum BedrockScoreAction {
         /**
          * Represents the action of setting a score.
          */

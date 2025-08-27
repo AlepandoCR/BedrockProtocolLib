@@ -13,75 +13,75 @@ public interface BedrockLocation {
      *
      * @return the X coordinate as a float.
      */
-    public float getX();
+    float getX();
 
     /**
      * Gets the Y coordinate of the location.
      *
      * @return the Y coordinate as a float.
      */
-    public float getY();
+    float getY();
 
     /**
      * Gets the Z coordinate of the location.
      *
      * @return the Z coordinate as a float.
      */
-    public float getZ();
+    float getZ();
 
     /**
      * Gets the yaw (horizontal rotation) of the location.
      *
      * @return the yaw as a float.
      */
-    public float getYaw();
+    float getYaw();
 
     /**
      * Gets the pitch (vertical rotation) of the location.
      *
      * @return the pitch as a float.
      */
-    public float getPitch();
+    float getPitch();
 
     /**
      * Converts the location to a Vector3f representation.
      *
      * @return the location as a {@link Vector3f}.
      */
-    public Vector3f toVector3f();
+    Vector3f toVector3f();
 
     /**
      * Sets the yaw (horizontal rotation) of the location.
      *
      * @param yaw the new yaw value as a float.
      */
-    public void setYaw(float yaw);
+    void setYaw(float yaw);
 
     /**
      * Sets the pitch (vertical rotation) of the location.
      *
      * @param pitch the new pitch value as a float.
      */
-    public void setPitch(float pitch);
+    void setPitch(float pitch);
 
     /**
      * Sets the X coordinate of the location.
      *
      * @param x the new X coordinate as a float.
      */
-    public void setX(float x);
+    void setX(float x);
 
     /**
      * Sets the Y coordinate of the location.
      *
      * @param y the new Y coordinate as a float.
      */
-    public void setY(float y);
+    void setY(float y);
 
     /**
      * Sets the Z coordinate of the location.
      *
      * @param z the new Z coordinate as a float.
      */
-    public void setZ(float z);
+    void setZ(float z);
 }

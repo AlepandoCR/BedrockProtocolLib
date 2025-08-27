@@ -15,14 +15,14 @@ public interface BedrockEntity {
      *
      * @return the {@link Entity} instance.
      */
-    public Entity getRawEntity();
+    Entity getRawEntity();
 
     /**
      * Sets the location of the entity.
      *
      * @param location the new {@link BedrockLocation} of the entity.
      */
-    public void setLocation(BedrockLocation location);
+    void setLocation(BedrockLocation location);
 
 
     /**
@@ -31,7 +31,7 @@ public interface BedrockEntity {
      * @param location the new {@link BedrockLocation} of the entity.
      * @param headYaw the new head yaw angle of the entity.
      */
-    public void setLocation(BedrockLocation location, float headYaw);
+    void setLocation(BedrockLocation location, float headYaw);
 
     /**
      * Sets the location of the entity and specifies whether it is on the ground or teleported.
@@ -40,7 +40,7 @@ public interface BedrockEntity {
      * @param isOnGround whether the entity is on the ground.
      * @param teleported whether the entity was teleported.
      */
-    public void setLocation(BedrockLocation location, boolean isOnGround, boolean teleported);
+    void setLocation(BedrockLocation location, boolean isOnGround, boolean teleported);
 
     /**
      * Sets the location of the entity, updates its head yaw, and specifies whether it is on the ground or teleported.
@@ -50,26 +50,26 @@ public interface BedrockEntity {
      * @param isOnGround whether the entity is on the ground.
      * @param teleported whether the entity was teleported.
      */
-    public void setLocation(BedrockLocation location, float headYaw, boolean isOnGround, boolean teleported);
+    void setLocation(BedrockLocation location, float headYaw, boolean isOnGround, boolean teleported);
 
     /**
      * Gets the current location of the entity.
      *
      * @return the {@link BedrockLocation} of the entity.
      */
-    public BedrockLocation getLocation();
+    BedrockLocation getLocation();
 
     /**
      * Gets the metadata associated with the entity.
      *
      * @return the {@link BedrockEntityMetadata} of the entity.
      */
-    public BedrockEntityMetadata getEntityMetadata();
+    BedrockEntityMetadata getEntityMetadata();
 
     /**
      * Gets the property manager for the entity.
      *
      * @return the {@link GeyserEntityPropertyManager} managing the entity's properties.
      */
-    public GeyserEntityPropertyManager getEntityProperties();
+    GeyserEntityPropertyManager getEntityProperties();
 }

@@ -14,131 +14,131 @@ public interface BedrockBossEvent extends BedrockUIEvent<BossEventPacket> {
      *
      * @return the unique entity ID of the boss.
      */
-    public long geBossUniqueEntityId();
+    long geBossUniqueEntityId();
 
     /**
      * Sets the unique entity ID of the boss.
      *
      * @param uniqueId the unique entity ID to set.
      */
-    public void setBossUniqueEntityId(long uniqueId);
+    void setBossUniqueEntityId(long uniqueId);
 
     /**
      * Gets the current action of the boss event.
      *
      * @return the current {@link BedrockBossEventAction}.
      */
-    public BedrockBossEventAction getAction();
+    BedrockBossEventAction getAction();
 
     /**
      * Sets the action for the boss event.
      *
      * @param action the {@link BedrockBossEventAction} to set.
      */
-    public void setAction(BedrockBossEventAction action);
+    void setAction(BedrockBossEventAction action);
 
     /**
      * Gets the unique entity ID of the player associated with the boss event.
      *
      * @return the unique entity ID of the player.
      */
-    public long getPlayerUniqueEntityId();
+    long getPlayerUniqueEntityId();
 
     /**
      * Sets the unique entity ID of the player associated with the boss event.
      *
      * @param uniqueId the unique entity ID to set.
      */
-    public void setPlayerUniqueEntityId(long uniqueId);
+    void setPlayerUniqueEntityId(long uniqueId);
 
     /**
      * Gets the title of the boss event.
      *
      * @return the title of the boss event.
      */
-    public String getTitle();
+    String getTitle();
 
     /**
      * Sets the title of the boss event.
      *
      * @param title the title to set.
      */
-    public void setTitle(String title);
+    void setTitle(String title);
 
     /**
      * Gets the filtered title of the boss event.
      *
      * @return the filtered title of the boss event.
      */
-    public String getFilteredTitle();
+    String getFilteredTitle();
 
     /**
      * Sets the filtered title of the boss event.
      *
      * @param title the filtered title to set.
      */
-    public void setFilteredTitle(String title);
+    void setFilteredTitle(String title);
 
     /**
      * Gets the health percentage of the boss.
      *
      * @return the health percentage of the boss.
      */
-    public float getHealthPercentage();
+    float getHealthPercentage();
 
     /**
      * Sets the health percentage of the boss.
      *
      * @param percentage the health percentage to set.
      */
-    public void setHealthPercentage(float percentage);
+    void setHealthPercentage(float percentage);
 
     /**
      * Gets the darken sky value for the boss event.
      *
      * @return the darken sky value.
      */
-    public int getDarkenSky();
+    int getDarkenSky();
 
     /**
      * Sets the darken sky value for the boss event.
      *
      * @param darkenSky the darken sky value to set.
      */
-    public void setDarkenSky(int darkenSky);
+    void setDarkenSky(int darkenSky);
 
     /**
      * Gets the color of the boss bar.
      *
      * @return the color of the boss bar.
      */
-    public int getColor();
+    int getColor();
 
     /**
      * Sets the color of the boss bar.
      *
      * @param color the color to set.
      */
-    public void setColor(int color);
+    void setColor(int color);
 
     /**
      * Gets the overlay of the boss bar.
      *
      * @return the overlay of the boss bar.
      */
-    public int getOverlay();
+    int getOverlay();
 
     /**
      * Sets the overlay of the boss bar.
      *
      * @param overlay the overlay to set.
      */
-    public void setOverlay(int overlay);
+    void setOverlay(int overlay);
 
     /**
      * Represents the possible actions for a boss event.
      */
-    public enum BedrockBossEventAction {
+    enum BedrockBossEventAction {
 
         /**
          * Action to create a new boss event.

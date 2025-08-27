@@ -13,14 +13,14 @@ public interface BedrockEntityMetadata {
      *
      * @return the {@link GeyserDirtyMetadata} of the entity.
      */
-    public GeyserDirtyMetadata getEntityData();
+    GeyserDirtyMetadata getEntityData();
 
     /**
      * Sets the dirty metadata for the entity.
      *
      * @param entityData the {@link GeyserDirtyMetadata} to set.
      */
-    public void setEntityData(GeyserDirtyMetadata entityData);
+    void setEntityData(GeyserDirtyMetadata entityData);
 
     /**
      * Retrieves specific data associated with the entity based on the provided data type.
@@ -29,5 +29,5 @@ public interface BedrockEntityMetadata {
      * @param <T> the type of the data to return.
      * @return the data of the specified type.
      */
-    public <T> T getData(BedrockEntityData bedrockEntityData);
+    <T> T getData(BedrockEntityData bedrockEntityData);
 }

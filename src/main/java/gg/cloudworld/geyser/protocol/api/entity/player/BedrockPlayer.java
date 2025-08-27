@@ -13,5 +13,5 @@ public interface BedrockPlayer {
      *
      * @return the {@link GeyserSession} instance for this player.
      */
-    public GeyserSession getSession();
+    GeyserSession getSession();
 }
