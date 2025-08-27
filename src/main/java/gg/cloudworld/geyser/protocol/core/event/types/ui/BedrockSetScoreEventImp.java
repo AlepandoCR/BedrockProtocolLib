@@ -38,14 +38,4 @@ public class BedrockSetScoreEventImp extends BedrockUIEventImp<SetScorePacket> i
     public void clearInfos() {
         packet.getInfos().clear();
     }
-
-    @Override
-    protected Class<SetScorePacket> getPacketClass() {
-        return SetScorePacket.class;
-    }
-
-    @Override
-    protected Class<? extends BedrockEvent<SetScorePacket>> getEventClass() {
-        return BedrockSetScoreEvent.class;
-    }
 }

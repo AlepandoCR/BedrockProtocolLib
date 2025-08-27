@@ -15,7 +15,7 @@ public interface BedrockEntity {
      *
      * @return the {@link Entity} instance.
      */
-    public Entity getEntity();
+    public Entity getRawEntity();
 
     /**
      * Sets the location of the entity.

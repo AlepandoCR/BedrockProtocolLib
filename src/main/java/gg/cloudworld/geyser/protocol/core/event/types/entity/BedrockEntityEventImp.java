@@ -37,12 +37,12 @@ public abstract class BedrockEntityEventImp<T  extends BedrockPacket> extends Be
 
     @Override
     public float getHeadRotation() {
-        return entity.getEntity().getHeadYaw();
+        return entity.getRawEntity().getHeadYaw();
     }
 
     @Override
     public void setHeadRotation(float headRotation) {
-        entity.getEntity().setHeadYaw(headRotation);
+        entity.getRawEntity().setHeadYaw(headRotation);
     }
 
     @Override
@@ -61,7 +61,7 @@ public abstract class BedrockEntityEventImp<T  extends BedrockPacket> extends Be
     }
 
     @Override
-    public Entity getEntity() {
-        return entity.getEntity();
+    public BedrockEntity getEntity() {
+        return entity;
     }
 }

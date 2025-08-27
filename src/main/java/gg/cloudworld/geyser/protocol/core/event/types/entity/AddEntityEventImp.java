@@ -16,16 +16,6 @@ public class AddEntityEventImp extends BedrockEntityEventImp<AddEntityPacket> im
     }
 
     @Override
-    protected Class<AddEntityPacket> getPacketClass() {
-        return AddEntityPacket.class;
-    }
-
-    @Override
-    protected Class<? extends BedrockEvent<AddEntityPacket>> getEventClass() {
-        return this.getClass();
-    }
-
-    @Override
     public long getUniqueEntityId() {
         return packet.getUniqueEntityId();
     }

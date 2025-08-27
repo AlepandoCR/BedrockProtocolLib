@@ -14,6 +14,8 @@ public class BedrockEventManager {
     // Singleton instance of the EventManager.
     private static final EventManager eventManager = EventManager.getInstance();
 
+    private BedrockEventManager(){}
+
     /**
      * Registers a Bedrock event listener with the event manager.
      *

@@ -19,7 +19,7 @@ public class BedrockEntityImp implements BedrockEntity {
     }
 
     @Override
-    public Entity getEntity() {
+    public Entity getRawEntity() {
         return entity;
     }
 

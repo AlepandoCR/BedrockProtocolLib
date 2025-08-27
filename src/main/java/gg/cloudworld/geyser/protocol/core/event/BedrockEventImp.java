@@ -20,7 +20,6 @@ public abstract class BedrockEventImp<T extends BedrockPacket> implements Bedroc
     public BedrockEventImp(GeyserSession session, T packet) {
         player = new BedrockPlayerImp(session);
         this.packet = packet;
-        saveToRegistry();
     }
 
     protected BedrockEventImp(BedrockPlayer player) {
@@ -35,13 +34,5 @@ public abstract class BedrockEventImp<T extends BedrockPacket> implements Bedroc
     @Override
     public T getPacket() {
         return packet;
-    }
-
-    protected abstract Class<T> getPacketClass();
-
-    protected abstract Class<?extends BedrockEvent<T>> getEventClass();
-
-    private void saveToRegistry(){
-        PacketEventRegistry.getInstance().register(getPacketClass(), getEventClass());
     }
 }

@@ -1,5 +1,6 @@
 package gg.cloudworld.geyser.protocol.api.events.types.entity;
 
+import gg.cloudworld.geyser.protocol.api.entity.BedrockEntity;
 import gg.cloudworld.geyser.protocol.api.events.BedrockEvent;
 import gg.cloudworld.geyser.protocol.api.world.BedrockLocation;
 import org.cloudburstmc.math.vector.Vector2f;
@@ -162,5 +163,5 @@ public interface BedrockEntityEvent<T extends BedrockPacket> extends BedrockEven
      *
      * @return the {@link Entity}.
      */
-    public Entity getEntity();
+    public BedrockEntity getEntity();
 }
