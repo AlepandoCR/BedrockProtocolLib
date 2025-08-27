@@ -4,8 +4,8 @@ A Geyser extension that provides a simple API for other extensions to listen to 
 
 ## Installation
 
-2. Place the `.jar` file into the `extensions` folder of your Geyser installation.
-3. Restart Geyser.
+1. Place the `.jar` file into the `extensions` folder of your Geyser installation.
+2. Restart Geyser.
 
 ## For Developers
 
