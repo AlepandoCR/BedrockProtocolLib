@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @ApiStatus.Internal
 public class EventManager {
@@ -23,7 +25,7 @@ public class EventManager {
         return instance;
     }
 
-    private final Map<Class<? extends BedrockEvent<? extends BedrockPacket>>, List<RegisteredListener>> listenerMap = new HashMap<>();
+    private final Map<Class<? extends BedrockEvent<? extends BedrockPacket>>, List<RegisteredListener>> listenerMap = new ConcurrentHashMap<>();
 
     public void registerListener(BedrockEventListener listener) {
         for (Method method : listener.getClass().getDeclaredMethods()) {
@@ -32,7 +34,7 @@ public class EventManager {
                 if (BedrockEvent.class.isAssignableFrom(paramType)) {
                     Class<? extends BedrockEvent<? extends BedrockPacket>> eventType = (Class<? extends BedrockEvent<? extends BedrockPacket>>) paramType;
 
-                    listenerMap.computeIfAbsent(eventType, k -> new ArrayList<>());
+                    listenerMap.computeIfAbsent(eventType, k -> new CopyOnWriteArrayList<>());
                     listenerMap.get(eventType).add(new RegisteredListener(listener, method));
                 }
             }

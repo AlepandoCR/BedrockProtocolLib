@@ -35,14 +35,14 @@ public class BedrockPacketSnifferManager {
 
     private void connect(GeyserSession session, BedrockPacketSniffer sniffer) {
         Channel channel = getChannel(session);
-        String channel_name = getChannelName(session);
-        channel.pipeline().addAfter(BedrockPacketCodec.NAME, channel_name, sniffer);
+        String chanelName = getChannelName(session);
+        channel.pipeline().addAfter(BedrockPacketCodec.NAME, chanelName, sniffer);
     }
 
     private void disconnect(GeyserSession session){
         Channel channel = getChannel(session);
-        String channel_name = getChannelName(session);
-        channel.pipeline().remove(channel_name);
+        String chanelName = getChannelName(session);
+        channel.pipeline().remove(chanelName);
     }
 
     private Channel getChannel(GeyserSession session){

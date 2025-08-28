@@ -6,6 +6,7 @@ import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
 import org.geysermc.geyser.session.GeyserSession;
 import org.jetbrains.annotations.ApiStatus;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,13 @@ public class PacketEventRegistry {
     private final Map<Class<? extends BedrockPacket>, RegisteredPacketEvent<?, ?>> eventMap = new HashMap<>();
 
     public <P extends BedrockPacket, E extends BedrockEvent<P>> void register(Class<P> packetClass, Class<E> eventClass) {
-        this.eventMap.put(packetClass, new RegisteredPacketEvent<>(packetClass, eventClass));
+        try {
+            Constructor<E> constructor = eventClass.getConstructor(GeyserSession.class, packetClass);
+            this.eventMap.put(packetClass, new RegisteredPacketEvent<>(packetClass ,eventClass ,constructor ));
+
+        } catch ( NoSuchMethodException e ) {
+           e.printStackTrace();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -35,11 +42,9 @@ public class PacketEventRegistry {
         }
 
         try {
-            BedrockEvent<P> event = (BedrockEvent<P>) registered.eventClass()
-                    .getConstructor(GeyserSession.class, registered.packetClass())
-                    .newInstance(session, packet);
+            BedrockEvent<P> event = (BedrockEvent<P>)registered.constructor().newInstance(session, packet);
             event.call();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
