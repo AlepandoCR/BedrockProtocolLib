@@ -2,6 +2,7 @@ package gg.cloudworld.geyser.protocol.api.events.types.ui;
 
 import org.cloudburstmc.protocol.bedrock.data.ScoreInfo;
 import org.cloudburstmc.protocol.bedrock.packet.SetScorePacket;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -84,7 +85,7 @@ public interface BedrockSetScoreEvent extends BedrockUIEvent<SetScorePacket> {
          * @param action the {@link SetScorePacket.Action} to convert.
          * @return the corresponding {@link BedrockScoreAction}.
          */
-        public static BedrockScoreAction fromCloudburstAction(SetScorePacket.Action action) {
+        public static BedrockScoreAction fromCloudburstAction(SetScorePacket.@NotNull Action action) {
             return BedrockScoreAction.valueOf(action.name());
         }
     }
