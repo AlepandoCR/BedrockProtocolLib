@@ -9,18 +9,16 @@ import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
  * Manages the registration, unregistration, and firing of Bedrock events.
  * Provides static methods to interact with the underlying event manager.
  */
-public class BedrockEventManager {
+public interface BedrockEventManager {
 
-    private static final EventManager eventManager = EventManager.getInstance();
-
-    private BedrockEventManager(){}
+    EventManager eventManager = EventManager.getInstance();
 
     /**
      * Registers a Bedrock event listener with the event manager.
      *
      * @param listener the {@link BedrockEventListener} to register.
      */
-    public static void registerListener(BedrockEventListener listener){
+    static void registerListener(BedrockEventListener listener){
         eventManager.registerListener(listener);
     }
 
@@ -29,7 +27,7 @@ public class BedrockEventManager {
      *
      * @param listener the {@link BedrockEventListener} to unregister.
      */
-    public static void unregisterListener(BedrockEventListener listener){
+    static void unregisterListener(BedrockEventListener listener){
         eventManager.unregisterListener(listener);
     }
 
@@ -39,7 +37,7 @@ public class BedrockEventManager {
      * @param event the {@link BedrockEvent} to fire.
      * @param <T> the type of the Bedrock packet associated with the event.
      */
-    public static<T extends BedrockPacket> void fireEvent(BedrockEvent<T> event){
+    static<T extends BedrockPacket> void fireEvent(BedrockEvent<T> event){
         eventManager.fireEvent(event);
     }
 

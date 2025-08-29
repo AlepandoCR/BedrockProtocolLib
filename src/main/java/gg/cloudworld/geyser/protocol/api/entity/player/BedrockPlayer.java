@@ -1,6 +1,10 @@
 package gg.cloudworld.geyser.protocol.api.entity.player;
 
+import gg.cloudworld.geyser.protocol.api.events.BedrockEvent;
+import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
 import org.geysermc.geyser.session.GeyserSession;
+
+import java.util.UUID;
 
 /**
  * Represents a player in the Bedrock protocol.
@@ -14,4 +18,8 @@ public interface BedrockPlayer {
      * @return the {@link GeyserSession} instance for this player.
      */
     GeyserSession getSession();
+
+    UUID getUniqueId();
+
+    <E extends BedrockEvent<? extends BedrockPacket>>void sendPacket(E event);
 }

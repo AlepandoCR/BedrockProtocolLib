@@ -2,7 +2,6 @@ package gg.cloudworld.geyser.protocol;
 
 import gg.cloudworld.geyser.protocol.api.events.BedrockEvent;
 import gg.cloudworld.geyser.protocol.api.events.listener.manager.BedrockEventManager;
-import gg.cloudworld.geyser.protocol.api.events.types.world.BedrockWorldEvent;
 import gg.cloudworld.geyser.protocol.api.test.TestListener;
 import gg.cloudworld.geyser.protocol.core.event.types.entity.AddEntityEventImp;
 import gg.cloudworld.geyser.protocol.core.event.types.ui.BedrockBossEventImp;

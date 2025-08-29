@@ -35,4 +35,5 @@ public interface BedrockEvent<T extends BedrockPacket> {
      * @return the packet of type {@link T}.
      */
     T getPacket();
+
 }
