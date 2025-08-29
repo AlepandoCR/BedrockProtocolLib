@@ -5,6 +5,8 @@ import gg.cloudworld.geyser.protocol.api.world.BedrockLocation;
 import org.geysermc.geyser.entity.properties.GeyserEntityPropertyManager;
 import org.geysermc.geyser.entity.type.Entity;
 
+import javax.annotation.Nullable;
+
 /**
  * Represents a Bedrock entity, providing methods to manage its location, metadata, and properties.
  */
@@ -15,6 +17,7 @@ public interface BedrockEntity {
      *
      * @return the {@link Entity} instance.
      */
+    @Nullable
     Entity getRawEntity();
 
     /**
