@@ -4,16 +4,18 @@ import io.netty.channel.Channel;
 import org.cloudburstmc.protocol.bedrock.netty.codec.packet.BedrockPacketCodec;
 import org.geysermc.geyser.session.GeyserSession;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ApiStatus.Internal
 public class BedrockPacketSnifferManager {
 
-    private final List<BedrockPacketSniffer> packetSniffers = new ArrayList<>();
+    private final ConcurrentHashMap<GeyserSession,BedrockPacketSniffer> packetSniffers = new ConcurrentHashMap<>();
 
-    private static BedrockPacketSnifferManager instance = new BedrockPacketSnifferManager();
+    private static final BedrockPacketSnifferManager instance = new BedrockPacketSnifferManager();
 
     public static BedrockPacketSnifferManager getInstance() {
         return instance;
@@ -29,7 +31,9 @@ public class BedrockPacketSnifferManager {
     }
 
     public void processLeave(GeyserSession session) {
-        removeSniffer(getSniffer(session));
+        BedrockPacketSniffer sniffer = getSniffer(session);
+        if(sniffer == null) return;
+        removeSniffer(sniffer);
         disconnect(session);
     }
 
@@ -54,14 +58,15 @@ public class BedrockPacketSnifferManager {
     }
 
     private void addSniffer(BedrockPacketSniffer sniffer){
-        packetSniffers.add(sniffer);
+        packetSniffers.putIfAbsent(sniffer.getSession(),sniffer);
     }
 
     private void removeSniffer(BedrockPacketSniffer sniffer){
-        packetSniffers.remove(sniffer);
+        packetSniffers.remove(sniffer.getSession());
     }
 
+    @Nullable
     public BedrockPacketSniffer getSniffer(GeyserSession session){
-        return packetSniffers.stream().filter(packetSniffer -> packetSniffer.getSession().equals(session)).findFirst().orElse(null);
+        return packetSniffers.get(session);
     }
 }
