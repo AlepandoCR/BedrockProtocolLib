@@ -25,6 +25,7 @@ public class BedrockEventManagerImp {
     }
 
     private final Map<Class<? extends BedrockEvent<? extends BedrockPacket>>, List<RegisteredListener>> listenerMap = new ConcurrentHashMap<>();
+    private final Map<Class<? extends BedrockEvent<? extends BedrockPacket>>, List<RegisteredListener>> listenerCache = new ConcurrentHashMap<>();
 
     public void registerListener(BedrockEventListener listener) {
         for (Method method : listener.getClass().getDeclaredMethods()) {
@@ -35,23 +36,28 @@ public class BedrockEventManagerImp {
 
                     listenerMap.computeIfAbsent(eventType, k -> new CopyOnWriteArrayList<>());
                     listenerMap.get(eventType).add(new RegisteredListener(listener, method));
+                    listenerCache.clear();
                 }
             }
         }
     }
 
     public void fireEvent(BedrockEvent<? extends BedrockPacket> event) {
-        Map<Method, RegisteredListener> listenersToInvoke = new HashMap<>();
-
-        for (Map.Entry<Class<? extends BedrockEvent<? extends BedrockPacket>>, List<RegisteredListener>> entry : listenerMap.entrySet()) {
-            if (entry.getKey().isAssignableFrom(event.getClass())) {
-                for (RegisteredListener listener : entry.getValue()) {
-                    listenersToInvoke.putIfAbsent(listener.method(), listener);
+        @SuppressWarnings("unchecked")
+        Class<? extends BedrockEvent<? extends BedrockPacket>> eventType = (Class<? extends BedrockEvent<? extends BedrockPacket>>) event.getClass();
+        List<RegisteredListener> listeners = listenerCache.computeIfAbsent(eventType, eventClass -> {
+            Map<Method, RegisteredListener> listenersToInvoke = new HashMap<>();
+            for (Map.Entry<Class<? extends BedrockEvent<? extends BedrockPacket>>, List<RegisteredListener>> entry : listenerMap.entrySet()) {
+                if (entry.getKey().isAssignableFrom(eventClass)) {
+                    for (RegisteredListener listener : entry.getValue()) {
+                        listenersToInvoke.putIfAbsent(listener.method(), listener);
+                    }
                 }
             }
-        }
+            return List.copyOf(listenersToInvoke.values());
+        });
 
-        for (RegisteredListener registeredListener : listenersToInvoke.values()) {
+        for (RegisteredListener registeredListener : listeners) {
             try {
                 registeredListener.method().invoke(registeredListener.listener(), event);
             } catch (Exception e) {
@@ -66,6 +72,7 @@ public class BedrockEventManagerImp {
                 listeners.removeIf(registered -> registered.listener().equals(listener))
         );
         listenerMap.entrySet().removeIf(entry -> entry.getValue().isEmpty());
+        listenerCache.clear();
     }
 
 

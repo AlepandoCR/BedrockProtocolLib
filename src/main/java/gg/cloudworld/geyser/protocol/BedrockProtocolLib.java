@@ -19,13 +19,11 @@ import org.geysermc.geyser.session.GeyserSession;
 
 public class BedrockProtocolLib implements Extension
 {
-    private static final BedrockProtocolLib instance = new BedrockProtocolLib();
-
-    private BedrockProtocolLib(){
-
+    static {
+        registerEvents();
     }
 
-    private void registerEvents(){
+    private static void registerEvents(){
         registerEvent(AddEntityPacket.class, BedrockAddEntityEventImp.class);
         registerEvent(SetScorePacket.class, BedrockSetScoreEventImp.class);
         registerEvent(BossEventPacket.class, BedrockBossEventImp.class);
@@ -34,7 +32,6 @@ public class BedrockProtocolLib implements Extension
 
     @Subscribe
     public void onEnable(GeyserPostInitializeEvent event){
-        registerEvents();
         BedrockEventManager.registerListener(new TestListener());
     }
 
@@ -49,9 +46,5 @@ public class BedrockProtocolLib implements Extension
 
     private static<P extends BedrockPacket, E extends BedrockEvent<P>> void registerEvent(Class<P> packetClass, Class<E> eventClass){
         PacketEventRegistry.getInstance().register(packetClass,eventClass);
-    }
-
-    public static BedrockProtocolLib getInstance(){
-        return instance;
     }
 }
