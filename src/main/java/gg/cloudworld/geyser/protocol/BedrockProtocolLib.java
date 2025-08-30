@@ -24,7 +24,11 @@ import org.geysermc.geyser.session.GeyserSession;
 
 public class BedrockProtocolLib implements Extension
 {
-    private static<P extends BedrockPacket, E extends BedrockEvent<P>> void registerEvent(Class<P> packetClass, Class<E> eventClass){
+    /**
+     * @param packetClass BedrockPacket class
+     * @param eventClass BedrockEvent class
+     */
+    public static<P extends BedrockPacket, E extends BedrockEvent<P>> void registerEvent(Class<P> packetClass, Class<E> eventClass){
         PacketEventRegistry.getInstance().register(packetClass,eventClass);
     }
 
