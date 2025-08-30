@@ -19,9 +19,6 @@ import org.geysermc.geyser.session.GeyserSession;
 
 public class BedrockProtocolLib implements Extension
 {
-    static {
-        registerEvents();
-    }
 
     private static void registerEvents(){
         registerEvent(AddEntityPacket.class, BedrockAddEntityEventImp.class);
@@ -32,6 +29,7 @@ public class BedrockProtocolLib implements Extension
 
     @Subscribe
     public void onEnable(GeyserPostInitializeEvent event){
+        registerEvents();
         BedrockEventManager.registerListener(new TestListener());
     }
 
