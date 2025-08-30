@@ -3,7 +3,7 @@ package gg.cloudworld.geyser.protocol;
 import gg.cloudworld.geyser.protocol.api.events.BedrockEvent;
 import gg.cloudworld.geyser.protocol.api.events.listener.manager.BedrockEventManager;
 import gg.cloudworld.geyser.protocol.api.test.TestListener;
-import gg.cloudworld.geyser.protocol.core.event.types.entity.AddEntityEventImp;
+import gg.cloudworld.geyser.protocol.core.event.types.entity.BedrockAddEntityEventImp;
 import gg.cloudworld.geyser.protocol.core.event.types.ui.BedrockBossEventImp;
 import gg.cloudworld.geyser.protocol.core.event.types.ui.BedrockSetScoreEventImp;
 import gg.cloudworld.geyser.protocol.core.event.types.world.BedrockWorldEventImp;
@@ -20,7 +20,7 @@ import org.geysermc.geyser.session.GeyserSession;
 public class BedrockProtocolLib implements Extension
 {
     static {
-        registerEvent(AddEntityPacket.class, AddEntityEventImp.class);
+        registerEvent(AddEntityPacket.class, BedrockAddEntityEventImp.class);
         registerEvent(SetScorePacket.class, BedrockSetScoreEventImp.class);
         registerEvent(BossEventPacket.class, BedrockBossEventImp.class);
         registerEvent(LevelEventPacket.class, BedrockWorldEventImp.class);

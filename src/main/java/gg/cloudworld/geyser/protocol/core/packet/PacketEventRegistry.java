@@ -30,13 +30,13 @@ public class PacketEventRegistry {
             this.eventMap.put(packetClass, new RegisteredPacketEvent<>(packetClass ,eventClass ,constructor ));
 
         } catch ( NoSuchMethodException e ) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unchecked")
     public <P extends BedrockPacket> void handle(GeyserSession session, P packet) {
-        RegisteredPacketEvent<?, ?> registered = eventMap.get(packet.getClass());
+        RegisteredPacketEvent<?, ?> registered = getRegisteredEvent(packet.getClass());
         if (registered == null) {
             return;
         }
@@ -47,5 +47,13 @@ public class PacketEventRegistry {
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
+
+    public RegisteredPacketEvent<?, ?> getRegisteredEvent(Class<? extends BedrockPacket> packetClass) {
+        return eventMap.get(packetClass);
+    }
+
+    public Map<Class<? extends BedrockPacket>, RegisteredPacketEvent<?, ?>> getRegisteredEvents() {
+        return eventMap;
     }
 }

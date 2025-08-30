@@ -7,7 +7,6 @@ import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,13 +14,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @ApiStatus.Internal
-public class EventManager {
+public class BedrockEventManagerImp {
 
-    private static final EventManager instance = new EventManager();
+    private static final BedrockEventManagerImp instance = new BedrockEventManagerImp();
 
-    private EventManager() {}
+    private BedrockEventManagerImp() {}
 
-    public static EventManager getInstance() {
+    public static BedrockEventManagerImp getInstance() {
         return instance;
     }
 

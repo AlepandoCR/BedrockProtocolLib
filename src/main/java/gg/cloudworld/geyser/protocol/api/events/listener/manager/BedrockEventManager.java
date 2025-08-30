@@ -2,7 +2,7 @@ package gg.cloudworld.geyser.protocol.api.events.listener.manager;
 
 import gg.cloudworld.geyser.protocol.api.events.BedrockEvent;
 import gg.cloudworld.geyser.protocol.api.events.listener.BedrockEventListener;
-import gg.cloudworld.geyser.protocol.core.event.EventManager;
+import gg.cloudworld.geyser.protocol.core.event.BedrockEventManagerImp;
 import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
 
 /**
@@ -11,15 +11,13 @@ import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
  */
 public interface BedrockEventManager {
 
-    EventManager eventManager = EventManager.getInstance();
-
     /**
      * Registers a Bedrock event listener with the event manager.
      *
      * @param listener the {@link BedrockEventListener} to register.
      */
     static void registerListener(BedrockEventListener listener){
-        eventManager.registerListener(listener);
+        BedrockEventManagerImp.getInstance().registerListener(listener);
     }
 
     /**
@@ -28,7 +26,7 @@ public interface BedrockEventManager {
      * @param listener the {@link BedrockEventListener} to unregister.
      */
     static void unregisterListener(BedrockEventListener listener){
-        eventManager.unregisterListener(listener);
+        BedrockEventManagerImp.getInstance().unregisterListener(listener);
     }
 
     /**
@@ -38,7 +36,7 @@ public interface BedrockEventManager {
      * @param <T> the type of the Bedrock packet associated with the event.
      */
     static<T extends BedrockPacket> void fireEvent(BedrockEvent<T> event){
-        eventManager.fireEvent(event);
+        BedrockEventManagerImp.getInstance().fireEvent(event);
     }
 
 }

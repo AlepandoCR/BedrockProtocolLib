@@ -1,6 +1,6 @@
 package gg.cloudworld.geyser.protocol.core.event.types.entity;
 
-import gg.cloudworld.geyser.protocol.api.events.types.entity.AddEntityEvent;
+import gg.cloudworld.geyser.protocol.api.events.types.entity.BedrockAddEntityEvent;
 import gg.cloudworld.geyser.protocol.core.entity.util.EntityUtils;
 import org.cloudburstmc.math.vector.Vector2f;
 import org.cloudburstmc.math.vector.Vector3f;
@@ -9,8 +9,8 @@ import org.geysermc.geyser.session.GeyserSession;
 import org.jetbrains.annotations.ApiStatus;
 
 @ApiStatus.Internal
-public class AddEntityEventImp extends BedrockEntityEventImp<AddEntityPacket> implements AddEntityEvent{
-    public AddEntityEventImp(GeyserSession session, AddEntityPacket packet) {
+public class BedrockAddEntityEventImp extends BedrockEntityEventImp<AddEntityPacket> implements BedrockAddEntityEvent {
+    public BedrockAddEntityEventImp(GeyserSession session, AddEntityPacket packet) {
         super(session, EntityUtils.getEntity(session,packet.getRuntimeEntityId()), packet);
     }
 

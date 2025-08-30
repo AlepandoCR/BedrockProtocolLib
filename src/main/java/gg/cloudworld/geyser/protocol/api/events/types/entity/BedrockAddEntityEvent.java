@@ -5,6 +5,6 @@ import org.cloudburstmc.protocol.bedrock.packet.AddEntityPacket;
 /**
  * Called when an entity is added to the player's session.
  */
-public interface AddEntityEvent extends BedrockEntityEvent<AddEntityPacket> {
+public interface BedrockAddEntityEvent extends BedrockEntityEvent<AddEntityPacket> {
 
 }
