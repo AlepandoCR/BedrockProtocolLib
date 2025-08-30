@@ -1,9 +1,8 @@
 plugins {
-    kotlin("jvm") version "2.1.21"
+    id("java-library")
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    kotlin("jvm") version "1.9.23"
 }
-
-val geyserApiVersion = "2.8.3"
 
 group = "gg.cloudworld.geyser.protocol"
 version = "1.0-SNAPSHOT"
@@ -13,12 +12,15 @@ repositories {
     maven("https://repo.opencollab.dev/main/")
 }
 
-dependencies {
-    implementation(kotlin("stdlib"))
-    compileOnly("org.geysermc.geyser:api:$geyserApiVersion-SNAPSHOT")
-    compileOnly("org.geysermc.geyser:core:$geyserApiVersion-SNAPSHOT")
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
-kotlin {
-    jvmToolchain(21)
+dependencies {
+    val geyserApiVersion = "2.8.3"
+
+    compileOnly("org.geysermc.geyser:api:$geyserApiVersion-SNAPSHOT")
+    compileOnly("org.geysermc.geyser:core:$geyserApiVersion-SNAPSHOT")
 }
