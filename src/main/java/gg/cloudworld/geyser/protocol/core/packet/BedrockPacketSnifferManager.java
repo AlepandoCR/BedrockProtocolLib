@@ -45,8 +45,12 @@ public class BedrockPacketSnifferManager {
 
     private void disconnect(GeyserSession session){
         Channel channel = getChannel(session);
-        String chanelName = getChannelName(session);
-        channel.pipeline().remove(chanelName);
+        if(channel != null && channel.isActive()) {
+            String chanelName = getChannelName(session);
+            if (channel.pipeline().get(chanelName) != null){
+                channel.pipeline().remove(chanelName);
+            }
+        }
     }
 
     private Channel getChannel(GeyserSession session){

@@ -8,8 +8,8 @@ import org.jetbrains.annotations.ApiStatus;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ApiStatus.Internal
 public class PacketEventRegistry {
@@ -22,7 +22,7 @@ public class PacketEventRegistry {
         return instance;
     }
 
-    private final Map<Class<? extends BedrockPacket>, RegisteredPacketEvent<?, ?>> eventMap = new HashMap<>();
+    private final ConcurrentHashMap<Class<? extends BedrockPacket>, RegisteredPacketEvent<?, ?>> eventMap = new ConcurrentHashMap<>();
 
     public <P extends BedrockPacket, E extends BedrockEvent<P>> void register(Class<P> packetClass, Class<E> eventClass) {
         try {
