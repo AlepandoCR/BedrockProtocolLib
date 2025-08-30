@@ -25,4 +25,15 @@ public class BedrockPacketSniffer extends PacketSniffer {
 
         super.write(ctx, msg, promise);
     }
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        if (msg instanceof BedrockPacketWrapper wrapper) {
+            BedrockPacket packet = wrapper.getPacket();
+            if (packet == null) return;
+
+            PacketEventRegistry.getInstance().handle(session, packet);
+        }
+        super.channelRead(ctx, msg);
+    }
 }
