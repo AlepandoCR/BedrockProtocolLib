@@ -9,9 +9,11 @@ import org.jetbrains.annotations.ApiStatus;
 
 @ApiStatus.Internal
 public class BedrockPacketSniffer extends PacketSniffer {
+    private final PacketEventRegistry eventRegistry;
 
-    public BedrockPacketSniffer(GeyserSession session) {
+    public BedrockPacketSniffer(GeyserSession session, PacketEventRegistry eventRegistry) {
         super(session);
+        this.eventRegistry = eventRegistry;
     }
 
     @Override
@@ -29,9 +31,9 @@ public class BedrockPacketSniffer extends PacketSniffer {
     private boolean readPacket(Object msg) {
         if (msg instanceof BedrockPacketWrapper wrapper) {
             BedrockPacket packet = wrapper.getPacket();
-            if(packet == null) return true;
+            if (packet == null) return true;
 
-            PacketEventRegistry.getInstance().handle(session, packet);
+            this.eventRegistry.handle(session, packet);
         }
         return false;
     }

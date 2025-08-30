@@ -14,15 +14,10 @@ import java.util.concurrent.ConcurrentHashMap;
 @ApiStatus.Internal
 public class PacketEventRegistry {
 
-    private static final PacketEventRegistry instance = new PacketEventRegistry();
-
-    private PacketEventRegistry() {}
-
-    public static PacketEventRegistry getInstance() {
-        return instance;
-    }
-
     private final ConcurrentHashMap<Class<? extends BedrockPacket>, RegisteredPacketEvent<?, ?>> eventMap = new ConcurrentHashMap<>();
+
+    public PacketEventRegistry() {
+    }
 
     public <P extends BedrockPacket, E extends BedrockEvent<P>> void register(Class<P> packetClass, Class<E> eventClass) {
         try {

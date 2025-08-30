@@ -26,7 +26,7 @@ public interface BedrockEvent<T extends BedrockPacket> {
      * This method uses the {@link BedrockEventManager} to fire the event.
      */
     default void call() {
-        BedrockProtocolLib.getBedrockEventManager().fireEvent(this);
+        BedrockProtocolLib.getApi().getEventManager().fireEvent(this);
         GeyserImpl.getInstance().getLogger().debug("Bedrock event has been called, event: " + this.getClass().getSimpleName());
     }
 

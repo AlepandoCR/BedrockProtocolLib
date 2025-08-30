@@ -17,12 +17,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @ApiStatus.Internal
 public class BedrockEventManagerImp implements BedrockEventManager {
 
-    private static final BedrockEventManagerImp instance = new BedrockEventManagerImp();
-
-    private BedrockEventManagerImp() {}
-
-    public static BedrockEventManagerImp getInstance() {
-        return instance;
+    public BedrockEventManagerImp() {
     }
 
     private final Map<Class<? extends BedrockEvent<? extends BedrockPacket>>, List<RegisteredListener>> listenerMap = new ConcurrentHashMap<>();

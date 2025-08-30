@@ -1,31 +1,27 @@
 package gg.cloudworld.geyser.protocol.core.packet;
 
+import gg.cloudworld.geyser.protocol.api.packet.BedrockPacketSnifferManager;
 import io.netty.channel.Channel;
 import org.cloudburstmc.protocol.bedrock.netty.codec.packet.BedrockPacketCodec;
 import org.geysermc.geyser.session.GeyserSession;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+
 @ApiStatus.Internal
-public class BedrockPacketSnifferManager {
+public class BedrockPacketSnifferManagerImp implements BedrockPacketSnifferManager {
+    private final PacketEventRegistry eventRegistry;
 
-    private final ConcurrentHashMap<GeyserSession,BedrockPacketSniffer> packetSniffers = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<GeyserSession, BedrockPacketSniffer> packetSniffers = new ConcurrentHashMap<>();
 
-    private static final BedrockPacketSnifferManager instance = new BedrockPacketSnifferManager();
-
-    public static BedrockPacketSnifferManager getInstance() {
-        return instance;
-    }
-
-    private BedrockPacketSnifferManager(){
+    public BedrockPacketSnifferManagerImp(PacketEventRegistry eventRegistry) {
+        this.eventRegistry = eventRegistry;
     }
 
     public void processJoin(GeyserSession session) {
-        BedrockPacketSniffer sniffer = new BedrockPacketSniffer(session);
+        BedrockPacketSniffer sniffer = new BedrockPacketSniffer(session, this.eventRegistry);
         addSniffer(sniffer);
         connect(session,sniffer);
     }

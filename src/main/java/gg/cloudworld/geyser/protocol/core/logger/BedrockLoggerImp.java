@@ -6,13 +6,10 @@ import org.geysermc.geyser.GeyserLogger;
 
 public class BedrockLoggerImp implements BedrockLogger {
 
-    private static final BedrockLoggerImp instance = new BedrockLoggerImp();
-
-    private BedrockLoggerImp(){
-
-    }
-
     private final GeyserLogger logger = GeyserImpl.getInstance().getLogger();
+
+    public BedrockLoggerImp() {
+    }
 
     @Override
     public void info(String content) {
@@ -29,7 +26,4 @@ public class BedrockLoggerImp implements BedrockLogger {
         logger.severe(content);
     }
 
-    public static BedrockLoggerImp getInstance(){
-        return instance;
-    }
 }

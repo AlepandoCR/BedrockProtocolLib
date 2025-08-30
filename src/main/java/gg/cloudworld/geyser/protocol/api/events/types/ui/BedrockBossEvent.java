@@ -2,6 +2,7 @@ package gg.cloudworld.geyser.protocol.api.events.types.ui;
 
 import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
 import org.cloudburstmc.protocol.bedrock.packet.BossEventPacket;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents a Bedrock Boss Event, which is used to manage and display boss bars in the Bedrock protocol.
@@ -205,7 +206,7 @@ public interface BedrockBossEvent extends BedrockUIEvent<BossEventPacket> {
             return this.bedrockAction;
         }
 
-        public static BedrockBossEventAction fromCloudburstAction(BossEventPacket.Action action) {
+        public static BedrockBossEventAction fromCloudburstAction(BossEventPacket.@NotNull Action action) {
             return BedrockBossEventAction.valueOf(action.name());
         }
     }

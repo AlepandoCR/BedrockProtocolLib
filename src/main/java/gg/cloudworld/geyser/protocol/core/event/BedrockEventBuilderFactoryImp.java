@@ -12,13 +12,11 @@ import java.util.Map;
 
 @ApiStatus.Internal
 public final class BedrockEventBuilderFactoryImp implements BedrockEventBuilderFactory {
+    private final PacketEventRegistry packetEventRegistry;
 
-    private static final BedrockEventBuilderFactoryImp instance = new BedrockEventBuilderFactoryImp();
-
-    private BedrockEventBuilderFactoryImp() {
+    public BedrockEventBuilderFactoryImp(PacketEventRegistry packetEventRegistry) {
+        this.packetEventRegistry = packetEventRegistry;
     }
-
-    public static BedrockEventBuilderFactoryImp getInstance() {return instance;}
 
     @Override
     @SuppressWarnings("unchecked")
@@ -39,7 +37,7 @@ public final class BedrockEventBuilderFactoryImp implements BedrockEventBuilderF
 
     @SuppressWarnings("unchecked")
     private <T extends BedrockEvent<?>> Class<? extends T> findImplementation(Class<T> eventInterface) {
-        Map<Class<? extends BedrockPacket>, RegisteredPacketEvent<?, ?>> registeredEvents = PacketEventRegistry.getInstance().getRegisteredEvents();
+        Map<Class<? extends BedrockPacket>, RegisteredPacketEvent<?, ?>> registeredEvents = this.packetEventRegistry.getRegisteredEvents();
         for (RegisteredPacketEvent<?, ?> registeredEvent : registeredEvents.values()) {
             if (eventInterface.isAssignableFrom(registeredEvent.eventClass())) {
                 return (Class<? extends T>) registeredEvent.eventClass();
