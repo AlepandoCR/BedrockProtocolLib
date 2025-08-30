@@ -1,7 +1,6 @@
 package gg.cloudworld.geyser.protocol;
 
 import gg.cloudworld.geyser.protocol.api.BedrockProtocolAPI;
-import gg.cloudworld.geyser.protocol.api.test.TestListener;
 import gg.cloudworld.geyser.protocol.core.BedrockProtocolAPIImp;
 import org.geysermc.event.subscribe.Subscribe;
 import org.geysermc.geyser.api.event.bedrock.SessionDisconnectEvent;
@@ -16,7 +15,6 @@ public class BedrockProtocolLib implements Extension {
     @Subscribe
     public void onEnable(GeyserPostInitializeEvent event) {
         bedrockProtocol = new BedrockProtocolAPIImp();
-        bedrockProtocol.getEventManager().registerListener(new TestListener());
     }
 
     @Subscribe
