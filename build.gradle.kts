@@ -1,7 +1,6 @@
 plugins {
     id("java-library")
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    kotlin("jvm") version "1.9.23"
 }
 
 group = "gg.cloudworld.geyser.protocol"
