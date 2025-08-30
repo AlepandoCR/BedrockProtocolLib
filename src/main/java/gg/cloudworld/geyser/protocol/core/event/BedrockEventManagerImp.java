@@ -3,6 +3,7 @@ package gg.cloudworld.geyser.protocol.core.event;
 import gg.cloudworld.geyser.protocol.api.events.BedrockEvent;
 import gg.cloudworld.geyser.protocol.api.events.listener.annotations.BedrockEventHandler;
 import gg.cloudworld.geyser.protocol.api.events.listener.BedrockEventListener;
+import gg.cloudworld.geyser.protocol.api.events.listener.manager.BedrockEventManager;
 import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -14,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @ApiStatus.Internal
-public class BedrockEventManagerImp {
+public class BedrockEventManagerImp implements BedrockEventManager {
 
     private static final BedrockEventManagerImp instance = new BedrockEventManagerImp();
 
@@ -42,7 +43,7 @@ public class BedrockEventManagerImp {
         }
     }
 
-    public void fireEvent(BedrockEvent<? extends BedrockPacket> event) {
+    public<T extends BedrockPacket> void fireEvent(BedrockEvent<T> event) {
         @SuppressWarnings("unchecked")
         Class<? extends BedrockEvent<? extends BedrockPacket>> eventType = (Class<? extends BedrockEvent<? extends BedrockPacket>>) event.getClass();
         List<RegisteredListener> listeners = listenerCache.computeIfAbsent(eventType, eventClass -> {

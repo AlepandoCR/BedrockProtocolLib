@@ -1,6 +1,7 @@
 package gg.cloudworld.geyser.protocol.core.event;
 
 import gg.cloudworld.geyser.protocol.api.events.BedrockEvent;
+import gg.cloudworld.geyser.protocol.api.events.BedrockEventBuilderFactory;
 import gg.cloudworld.geyser.protocol.core.packet.PacketEventRegistry;
 import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
 import org.jetbrains.annotations.ApiStatus;
@@ -10,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 @ApiStatus.Internal
-public final class BedrockEventBuilderFactoryImp {
+public final class BedrockEventBuilderFactoryImp implements BedrockEventBuilderFactory {
 
     private static final BedrockEventBuilderFactoryImp instance = new BedrockEventBuilderFactoryImp();
 
@@ -19,6 +20,7 @@ public final class BedrockEventBuilderFactoryImp {
 
     public static BedrockEventBuilderFactoryImp getInstance() {return instance;}
 
+    @Override
     @SuppressWarnings("unchecked")
     public <T extends BedrockEvent<P>, P extends BedrockPacket> BedrockEventBuilderImp<T, P> builderFor(Class<T> eventInterfaceClass) {
         Class<? extends T> implementationClass = findImplementation(eventInterfaceClass);
@@ -36,7 +38,7 @@ public final class BedrockEventBuilderFactoryImp {
 
 
     @SuppressWarnings("unchecked")
-    private static <T extends BedrockEvent<?>> Class<? extends T> findImplementation(Class<T> eventInterface) {
+    private <T extends BedrockEvent<?>> Class<? extends T> findImplementation(Class<T> eventInterface) {
         Map<Class<? extends BedrockPacket>, RegisteredPacketEvent<?, ?>> registeredEvents = PacketEventRegistry.getInstance().getRegisteredEvents();
         for (RegisteredPacketEvent<?, ?> registeredEvent : registeredEvents.values()) {
             if (eventInterface.isAssignableFrom(registeredEvent.eventClass())) {
@@ -48,7 +50,7 @@ public final class BedrockEventBuilderFactoryImp {
 
 
     @SuppressWarnings("unchecked")
-    private static <P extends BedrockPacket> Class<P> findPacketClass(Class<?> eventInterface) {
+    private <P extends BedrockPacket> Class<P> findPacketClass(Class<?> eventInterface) {
         for (Type genericInterface : eventInterface.getGenericInterfaces()) {
             if (genericInterface instanceof ParameterizedType parameterizedType) {
                 if (parameterizedType.getRawType().equals(BedrockEvent.class) ||
