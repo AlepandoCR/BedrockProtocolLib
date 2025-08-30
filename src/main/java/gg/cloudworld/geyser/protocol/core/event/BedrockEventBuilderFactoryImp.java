@@ -11,12 +11,8 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 @ApiStatus.Internal
-public final class BedrockEventBuilderFactoryImp implements BedrockEventBuilderFactory {
-    private final PacketEventRegistry packetEventRegistry;
-
-    public BedrockEventBuilderFactoryImp(PacketEventRegistry packetEventRegistry) {
-        this.packetEventRegistry = packetEventRegistry;
-    }
+public record BedrockEventBuilderFactoryImp(
+        PacketEventRegistry packetEventRegistry) implements BedrockEventBuilderFactory {
 
     @Override
     @SuppressWarnings("unchecked")
