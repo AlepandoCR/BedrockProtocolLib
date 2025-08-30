@@ -2,6 +2,11 @@
 
 A Geyser extension that provides a simple API for other extensions to listen to Bedrock packet events.
 
+## Requirements
+
+- Java 21 or higher
+- Geyser API 2.8.3 or higher
+
 ## Installation
 
 1. Place the `.jar` file into the `extensions` folder of your Geyser installation.
@@ -9,9 +14,16 @@ A Geyser extension that provides a simple API for other extensions to listen to 
 
 ## For Developers
 
-## Usage
+### Usage
 
 To listen to Bedrock packet events, you need to create a class that implements `BedrockEventListener` and has methods annotated with `@BedrockEventHandler`.
+
+### Available Events
+
+- `BedrockAddEntityEvent`
+- `BedrockBossEvent`
+- `BedrockSetScoreEvent`
+- `BedrocWorldEvent`
 
 ### Example
 
@@ -25,9 +37,7 @@ import org.geysermc.geyser.entity.type.Entity;
 
 public class MyListener implements BedrockEventListener {
     @BedrockEventHandler
-    public void onEntitySpawn(AddEntityEvent entityEvent){
-        Class<? extends Entity> entityClass =  entityEvent.getEntity().getRawEntity().getClass();
-        String msg = "Entity spawned: " + entityClass.getSimpleName();
+    public void onEntitySpawn(BedrockAddEntityEvent entityEvent){
         // Do something with the event
     }
 }
@@ -35,17 +45,19 @@ public class MyListener implements BedrockEventListener {
 
 ### Registering the listener
 
-To register your listener, you need to call `BedrockEventManager.registerListener()` from your extension's `onEnable()` method:
+To register your listener, you need to call `BedrockProtocolLib.getApi().getEventManager().registerListener()` from your extension's `onEnable()` method:
 
 ```java
 import gg.cloudworld.geyser.protocol.api.events.listener.manager.BedrockEventManager;
+import org.geysermc.geyser.api.event.lifecycle.GeyserEnableEvent;
 import org.geysermc.geyser.api.extension.Extension;
+import org.geysermc.geyser.api.event.Subscribe;
 
 public class MyExtension implements Extension {
 
-    @Suscribe
+    @Subscribe
     public void onEnable(GeyserPostInitializeEvent event) {
-        BedrockEventManager.registerListener(new MyListener());
+        BedrockProtocolLib.getApi().getEventManager().registerListener(new MyListener());
     }
 }
 ```
