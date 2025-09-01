@@ -18,23 +18,22 @@ public class BedrockPacketSniffer extends PacketSniffer {
 
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-        if (readPacket(msg)) return;
+        readPacket(msg);
         super.write(ctx, msg, promise);
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        if (readPacket(msg)) return;
+        readPacket(msg);
         super.channelRead(ctx, msg);
     }
 
-    private boolean readPacket(Object msg) {
+    private void readPacket(Object msg) {
         if (msg instanceof BedrockPacketWrapper wrapper) {
             BedrockPacket packet = wrapper.getPacket();
-            if (packet == null) return true;
+            if (packet == null) return;
 
             this.eventRegistry.handle(session, packet);
         }
-        return false;
     }
 }

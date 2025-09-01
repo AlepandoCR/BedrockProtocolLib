@@ -18,13 +18,13 @@ public class BedrockProtocolLib implements Extension {
     }
 
     @Subscribe
-    public void onBedrockLeave(SessionDisconnectEvent e) {
-        bedrockProtocol.getPacketSnifferManager().processLeave((GeyserSession) e.connection());
+    public void onBedrockLeave(SessionDisconnectEvent event) {
+        bedrockProtocol.getPacketSnifferManager().processLeave((GeyserSession) event.connection());
     }
 
     @Subscribe
-    public void onBedrockJoin(SessionInitializeEvent e) {
-        bedrockProtocol.getPacketSnifferManager().processJoin((GeyserSession) e.connection());
+    public void onBedrockJoin(SessionInitializeEvent event) {
+        bedrockProtocol.getPacketSnifferManager().processJoin((GeyserSession) event.connection());
     }
 
     public static BedrockProtocolAPI getApi() {
